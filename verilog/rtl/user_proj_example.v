@@ -35,11 +35,9 @@
  *-------------------------------------------------------------
  */
 
-module user_proj_example #(
-    parameter BITS = 32
-)(
+module user_proj_example (
 `ifdef USE_POWER_PINS
-    inout vdd,	// User area 1 1.8V supply
+    inout vdd,	// User area 1 5V supply
     inout vss,	// User area 1 digital ground
 `endif
 
@@ -66,100 +64,81 @@ module user_proj_example #(
     output [`MPRJ_IO_PADS-1:0] io_oeb,
 
     // IRQ
-    output [2:0] irq
+    output [2:0] irq,
+
+    input user_clock2
 );
-    wire clk;
+    wire clk, usr_clk2;
     wire rst;
 
-    wire [`MPRJ_IO_PADS-1:0] io_in;
-    wire [`MPRJ_IO_PADS-1:0] io_out;
-    wire [`MPRJ_IO_PADS-1:0] io_oeb;
+    wire [`MPRJ_IO_PADS*2+99:0] o_q, o_q_dly, const_zero; //1 ack + 32 data + 64 la data + 3 irq + 2*ios out/oeb
+    wire [`MPRJ_IO_PADS+198:0] buf_i, buf_i_q; //1 stb + 1 cyc + 1 we + 4 sel + 32 in data + 32 adr + 64 la data + zios in
 
-    wire [31:0] rdata; 
-    wire [31:0] wdata;
-    wire [BITS-1:0] count;
-
-    wire valid;
-    wire [3:0] wstrb;
-    wire [31:0] la_write;
-
-    // WB MI A
-    assign valid = wbs_cyc_i && wbs_stb_i; 
-    assign wstrb = wbs_sel_i & {4{wbs_we_i}};
-    assign wbs_dat_o = rdata;
-    assign wdata = wbs_dat_i;
-
-    // IO
-    assign io_out = count;
-    assign io_oeb = {(`MPRJ_IO_PADS-1){rst}};
-
-    // IRQ
-    assign irq = 3'b000;	// Unused
-
-    // LA
-    assign la_data_out = {{(127-BITS){1'b0}}, count};
-    // Assuming LA probes [63:32] are for controlling the count register  
-    assign la_write = ~la_oenb[63:32] & ~{BITS{valid}};
-    // Assuming LA probes [65:64] are for controlling the count clk & reset  
-    assign clk = (~la_oenb[64]) ? la_data_in[64]: wb_clk_i;
-    assign rst = (~la_oenb[65]) ? la_data_in[65]: wb_rst_i;
-
-    counter #(
-        .BITS(BITS)
-    ) counter(
-        .clk(clk),
-        .reset(rst),
-        .ready(wbs_ack_o),
-        .valid(valid),
-        .rdata(rdata),
-        .wdata(wbs_dat_i),
-        .wstrb(wstrb),
-        .la_write(la_write),
-        .la_input(la_data_in[63:32]),
-        .count(count)
+    // For an input, assume the load is that of a high drive strength buffer
+    gf180mcu_fd_sc_mcu7t5v0__clkbuf_8 CLK_BUF[1:0] (
+        `ifdef USE_POWER_PINS
+			.VDD(vdd),
+            .VSS(vss),
+		`endif
+        .I({wb_clk_i,user_clock2}),
+        .Z({clk, usr_clk2})
     );
 
-endmodule
+    gf180mcu_fd_sc_mcu7t5v0__buf_8 i_BUF[`MPRJ_IO_PADS+199:0] (
+        `ifdef USE_POWER_PINS
+			.VDD(vdd),
+            .VSS(vss),
+		`endif
+        .I({wb_rst_i, wbs_cyc_i, wbs_stb_i, wbs_we_i, wbs_sel_i, io_in, la_data_in, la_oenb, wbs_adr_i, wbs_dat_i}),
+        .Z({rst, buf_i})
+    );
 
-module counter #(
-    parameter BITS = 32
-)(
-    input clk,
-    input reset,
-    input valid,
-    input [3:0] wstrb,
-    input [BITS-1:0] wdata,
-    input [BITS-1:0] la_write,
-    input [BITS-1:0] la_input,
-    output ready,
-    output [BITS-1:0] rdata,
-    output [BITS-1:0] count
-);
-    reg ready;
-    reg [BITS-1:0] count;
-    reg [BITS-1:0] rdata;
+    gf180mcu_fd_sc_mcu7t5v0__dffq_1 i_FF[`MPRJ_IO_PADS+198:0] (
+        `ifdef USE_POWER_PINS
+			.VDD(vdd),
+            .VSS(vss),
+		`endif
+        .D(buf_i),
+        .CLK(clk),
+        .Q(buf_i_q)
+    );
+    
+    // For an output, assume the drive capability is that of a low drive strength buffer 
+    gf180mcu_fd_sc_mcu7t5v0__buf_1 o_BUF[`MPRJ_IO_PADS*2+99:0] (
+        `ifdef USE_POWER_PINS
+			.VDD(vdd),
+            .VSS(vss),
+		`endif        
+        .I({o_q_dly}), 
+        .Z({wbs_ack_o, io_oeb, io_out, irq, la_data_out, wbs_dat_o})
+    );
 
-    always @(posedge clk) begin
-        if (reset) begin
-            count <= 0;
-            ready <= 0;
-        end else begin
-            ready <= 1'b0;
-            if (~|la_write) begin
-                count <= count + 1;
-            end
-            if (valid && !ready) begin
-                ready <= 1'b1;
-                rdata <= count;
-                if (wstrb[0]) count[7:0]   <= wdata[7:0];
-                if (wstrb[1]) count[15:8]  <= wdata[15:8];
-                if (wstrb[2]) count[23:16] <= wdata[23:16];
-                if (wstrb[3]) count[31:24] <= wdata[31:24];
-            end else if (|la_write) begin
-                count <= la_write & la_input;
-            end
-        end
-    end
+    // output transition
+    gf180mcu_fd_sc_mcu7t5v0__tiel const_zero[`MPRJ_IO_PADS*2+99:0] (
+        `ifdef USE_POWER_PINS
+			.VDD(vdd),
+            .VSS(vss),
+		`endif        
+        .ZN(const_zero)
+    );
 
+    gf180mcu_fd_sc_mcu7t5v0__dffq_1 o_FF[`MPRJ_IO_PADS*2+99:0] (
+        `ifdef USE_POWER_PINS
+			.VDD(vdd),
+            .VSS(vss),
+		`endif        
+        .D(const_zero),
+        .CLK(clk),
+        .Q(o_q)
+    );
+
+    gf180mcu_fd_sc_mcu7t5v0__dlyd_1 o_dly[`MPRJ_IO_PADS*2+99:0] (
+        `ifdef USE_POWER_PINS
+			.VDD(vdd),
+            .VSS(vss),
+		`endif 
+        .I(o_q), 
+        .Z(o_q_dly)
+    );
 endmodule
 `default_nettype wire
