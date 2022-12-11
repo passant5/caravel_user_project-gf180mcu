@@ -25,8 +25,18 @@ set ::env(VERILOG_FILES) "\
 set ::env(DESIGN_IS_CORE) 0
 
 set ::env(CLOCK_PORT) "wb_clk_i"
-set ::env(CLOCK_NET) "counter.clk"
+set ::env(CLOCK_NET) "clk"
 set ::env(CLOCK_PERIOD) "24.0"
+set ::env(SYNTH_READ_BLACKBOX_LIB) 1
+set ::env(PL_RESIZER_DESIGN_OPTIMIZATIONS) 0
+set ::env(PL_RESIZER_TIMING_OPTIMIZATIONS) 0
+set ::env(GLB_RESIZER_TIMING_OPTIMIZATIONS) 0
+set ::env(SYNTH_BUFFERING) 0
+set ::env(SYNTH_SIZING) 0
+set ::env(SYNTH_ELABORATE_ONLY) 1
+
+set ::env(RUN_TAP_DECAP_INSERTION) 1
+set ::env(CLOCK_TREE_SYNTH) 0
 
 set ::env(FP_SIZING) absolute
 set ::env(DIE_AREA) "0 0 900 600"
@@ -54,3 +64,5 @@ set ::env(GND_NETS) [list {vss}]
 set ::env(DIODE_INSERTION_STRATEGY) 4 
 # If you're going to use multiple power domains, then disable cvc run.
 set ::env(RUN_CVC) 1
+
+set ::env(QUIT_ON_TIMING_VIOLATIONS) 0

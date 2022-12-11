@@ -29,9 +29,7 @@
  *-------------------------------------------------------------
  */
 
-module user_project_wrapper #(
-    parameter BITS = 32
-)(
+module user_project_wrapper (
 `ifdef USE_POWER_PINS
     inout vdd,		// User area 5.0V supply
     inout vss,		// User area ground
@@ -103,7 +101,9 @@ user_proj_example mprj (
     .io_oeb(io_oeb),
 
     // IRQ
-    .irq(user_irq)
+    .irq(user_irq),
+
+    .user_clock2(user_clock2)
 );
 
 endmodule	// user_project_wrapper
