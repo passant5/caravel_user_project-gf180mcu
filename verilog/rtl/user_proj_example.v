@@ -132,7 +132,7 @@ module user_proj_example (
         .Q(o_q)
     );
 
-    gf180mcu_fd_sc_mcu7t5v0__dlyd_1 o_dly[`MPRJ_IO_PADS*2+99:0] (
+    gf180mcu_fd_sc_mcu7t5v0__dlyb_1 o_dly[`MPRJ_IO_PADS*2+99:0] (
         `ifdef USE_POWER_PINS
 			.VDD(vdd),
             .VSS(vss),

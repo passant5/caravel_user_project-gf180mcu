@@ -2,8 +2,8 @@
 ===========================================================================
 report_checks -unconstrained
 ============================================================================
-Startpoint: o_FF[135] (rising edge-triggered flip-flop clocked by wb_clk_i)
-Endpoint: io_out[36] (output port clocked by wb_clk_i)
+Startpoint: o_FF[136] (rising edge-triggered flip-flop clocked by wb_clk_i)
+Endpoint: io_out[37] (output port clocked by wb_clk_i)
 Path Group: wb_clk_i
 Path Type: max
 
@@ -14,19 +14,19 @@ Fanout     Cap    Slew   Delay    Time   Description
                   0.10    0.04    0.04 ^ wb_clk_i (in)
      2    0.02                           wb_clk_i (net)
                   0.10    0.00    0.04 ^ CLK_BUF[1]/I (gf180mcu_fd_sc_mcu7t5v0__clkbuf_8)
-                  5.56    3.13    3.17 ^ CLK_BUF[1]/Z (gf180mcu_fd_sc_mcu7t5v0__clkbuf_8)
-   826    2.87                           clk (net)
-                  5.88    0.77    3.95 ^ o_FF[135]/CLK (gf180mcu_fd_sc_mcu7t5v0__dffq_1)
-                  0.34    1.17    5.12 ^ o_FF[135]/Q (gf180mcu_fd_sc_mcu7t5v0__dffq_1)
-     2    0.02                           o_q[135] (net)
-                  0.34    0.00    5.12 ^ o_dly[135]/I (gf180mcu_fd_sc_mcu7t5v0__dlyd_1)
-                  0.23    2.40    7.51 ^ o_dly[135]/Z (gf180mcu_fd_sc_mcu7t5v0__dlyd_1)
-     1    0.01                           o_q_dly[135] (net)
-                  0.23    0.00    7.52 ^ o_BUF[135]/I (gf180mcu_fd_sc_mcu7t5v0__buf_1)
-                  2.32    1.57    9.09 ^ o_BUF[135]/Z (gf180mcu_fd_sc_mcu7t5v0__buf_1)
-     1    0.07                           io_out[36] (net)
-                  2.32    0.02    9.11 ^ io_out[36] (out)
-                                  9.11   data arrival time
+                  5.03    2.58    2.62 ^ CLK_BUF[1]/Z (gf180mcu_fd_sc_mcu7t5v0__clkbuf_8)
+   826    2.78                           clk (net)
+                  6.33    1.53    4.15 ^ o_FF[136]/CLK (gf180mcu_fd_sc_mcu7t5v0__dffq_1)
+                  0.36    1.19    5.34 ^ o_FF[136]/Q (gf180mcu_fd_sc_mcu7t5v0__dffq_1)
+     2    0.02                           o_q[136] (net)
+                  0.36    0.00    5.34 ^ o_dly[136]/I (gf180mcu_fd_sc_mcu7t5v0__dlyb_1)
+                  0.96    1.45    6.79 ^ o_dly[136]/Z (gf180mcu_fd_sc_mcu7t5v0__dlyb_1)
+     2    0.06                           o_q_dly[136] (net)
+                  0.96    0.00    6.79 ^ o_BUF[136]/I (gf180mcu_fd_sc_mcu7t5v0__buf_1)
+                  1.72    1.25    8.04 ^ o_BUF[136]/Z (gf180mcu_fd_sc_mcu7t5v0__buf_1)
+     1    0.07                           io_out[37] (net)
+                  1.72    0.01    8.06 ^ io_out[37] (out)
+                                  8.06   data arrival time
 
                          24.00   24.00   clock wb_clk_i (rise edge)
                           0.00   24.00   clock network delay (propagated)
@@ -36,9 +36,9 @@ Fanout     Cap    Slew   Delay    Time   Description
                                  18.95   data required time
 -----------------------------------------------------------------------------
                                  18.95   data required time
-                                 -9.11   data arrival time
+                                 -8.06   data arrival time
 -----------------------------------------------------------------------------
-                                  9.84   slack (MET)
+                                 10.89   slack (MET)
 
 
 

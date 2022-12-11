@@ -1,9 +1,9 @@
 magic
 tech gf180mcuC
 magscale 1 5
-timestamp 1670762296
+timestamp 1670786345
 << obsm1 >>
-rect 672 1538 89320 58438
+rect 672 1079 89320 58438
 << metal2 >>
 rect 672 59600 728 60000
 rect 1456 59600 1512 60000
@@ -841,7 +841,7 @@ rect 86606 400 86770 430
 rect 86886 400 87050 430
 rect 87166 400 89306 430
 << obsm3 >>
-rect 9 462 89199 58422
+rect 9 1246 89087 58422
 << metal4 >>
 rect 2224 1538 2384 58438
 rect 9904 1538 10064 58438
@@ -855,6 +855,15 @@ rect 63664 1538 63824 58438
 rect 71344 1538 71504 58438
 rect 79024 1538 79184 58438
 rect 86704 1538 86864 58438
+<< obsm4 >>
+rect 4494 2921 9874 6599
+rect 10094 2921 17554 6599
+rect 17774 2921 25234 6599
+rect 25454 2921 32914 6599
+rect 33134 2921 40594 6599
+rect 40814 2921 48274 6599
+rect 48494 2921 55954 6599
+rect 56174 2921 60074 6599
 << labels >>
 rlabel metal2 s 672 59600 728 60000 6 io_in[0]
 port 1 nsew signal input
@@ -1716,8 +1725,8 @@ port 418 nsew signal input
 string FIXED_BBOX 0 0 90000 60000
 string LEFclass BLOCK
 string LEFview TRUE
-string GDS_END 3599436
-string GDS_FILE /home/passant/caravel_user_project-gf180mcu/openlane/user_proj_example/runs/22_12_11_04_36/results/signoff/user_proj_example.magic.gds
-string GDS_START 81026
+string GDS_END 3704724
+string GDS_FILE /home/passant/caravel_user_project-gf180mcu/openlane/user_proj_example/runs/22_12_11_11_17/results/signoff/user_proj_example.magic.gds
+string GDS_START 78210
 << end >>
 

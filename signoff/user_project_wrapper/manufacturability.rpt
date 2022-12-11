@@ -1,14 +1,14 @@
 Design Name: user_project_wrapper
-Run Directory: /home/passant/caravel_user_project-gf180mcu/openlane/user_project_wrapper/runs/22_12_11_05_16
+Run Directory: /home/passant/caravel_user_project-gf180mcu/openlane/user_project_wrapper/runs/22_12_11_11_21
 ----------------------------------------
 
 Magic DRC Summary:
-Source: /home/passant/caravel_user_project-gf180mcu/openlane/user_project_wrapper/runs/22_12_11_05_16/reports/signoff/drc.rpt
+Source: /home/passant/caravel_user_project-gf180mcu/openlane/user_project_wrapper/runs/22_12_11_11_21/reports/signoff/drc.rpt
 Total Magic DRC violations is 0
 ----------------------------------------
 
 LVS Summary:
-Source: /home/passant/caravel_user_project-gf180mcu/openlane/user_project_wrapper/runs/22_12_11_05_16/logs/signoff/user_project_wrapper.lvs.lef.log
+Source: /home/passant/caravel_user_project-gf180mcu/openlane/user_project_wrapper/runs/22_12_11_11_21/logs/signoff/user_project_wrapper.lvs.lef.log
 Source not found.
 ----------------------------------------
 

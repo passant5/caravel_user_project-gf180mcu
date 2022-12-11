@@ -5,15 +5,15 @@ Report : read_parasitics /home/passant/caravel_user_project-gf180mcu/signoff/use
 	-keep_capacitive_coupling
 Design : user_project_wrapper
 Version: T-2022.03-SP3
-Date   : Sun Dec 11 06:24:56 2022
+Date   : Sun Dec 11 11:33:32 2022
 ****************************************
 
         0 error(s)
         Format is SPEF
         Annotated nets                   :         1421
-        Annotated capacitances           :         9944
-        Annotated resistances            :         8527
-        Annotated coupling capacitances  :         7137
+        Annotated capacitances           :        10370
+        Annotated resistances            :         8950
+        Annotated coupling capacitances  :         8815
         Annotated PI models              :            0
         Annotated Elmore delays          :            0
 
@@ -25,15 +25,15 @@ Report : read_parasitics /home/passant/caravel_user_project-gf180mcu/signoff/use
 	-keep_capacitive_coupling
 Design : user_project_wrapper
 Version: T-2022.03-SP3
-Date   : Sun Dec 11 06:24:56 2022
+Date   : Sun Dec 11 11:33:32 2022
 ****************************************
 
         0 error(s)
         Format is SPEF
         Annotated nets                   :          416
-        Annotated capacitances           :         2207
-        Annotated resistances            :         1791
-        Annotated coupling capacitances  :         2779
+        Annotated capacitances           :         2266
+        Annotated resistances            :         1850
+        Annotated coupling capacitances  :         2805
         Annotated PI models              :            0
         Annotated Elmore delays          :            0
 
@@ -45,14 +45,14 @@ Report : annotated_parasitics
 	-boundary_nets
 Design : user_project_wrapper
 Version: T-2022.03-SP3
-Date   : Sun Dec 11 06:24:56 2022
+Date   : Sun Dec 11 11:33:32 2022
 ****************************************
 
                     |         |         |         |   RC    | Coupled |   Not   |
 Net Type            |  Total  | Lumped  |  RC pi  | network | network |Annotated|
 --------------------+---------+---------+---------+---------+---------+---------+
 Internal nets       |         |         |         |         |         |         |
-  - Pin to pin nets |     766 |       0 |       0 |      33 |     733 |       0 |
+  - Pin to pin nets |     766 |       0 |       0 |      94 |     672 |       0 |
   - Driverless nets |       0 |       0 |       0 |       0 |       0 |       0 |
   - Loadless nets   |     239 |       0 |       0 |     239 |       0 |       0 |
 --------------------+---------+---------+---------+---------+---------+---------+
@@ -61,7 +61,7 @@ Boundary/port nets  |         |         |         |         |         |         
   - Driverless nets |       0 |       0 |       0 |       0 |       0 |       0 |
   - Loadless nets   |       0 |       0 |       0 |       0 |       0 |       0 |
 --------------------+---------+---------+---------+---------+---------+---------+
-                    |    1421 |       0 |       0 |     272 |    1149 |       0 |
+                    |    1421 |       0 |       0 |     333 |    1088 |       0 |
 
 ****************************************
 Report : annotated_parasitics
@@ -70,14 +70,14 @@ Report : annotated_parasitics
 	-boundary_nets
 Design : user_project_wrapper
 Version: T-2022.03-SP3
-Date   : Sun Dec 11 06:24:56 2022
+Date   : Sun Dec 11 11:33:32 2022
 ****************************************
 
                     |         |         |         |   RC    | Coupled |   Not   |
 Net Type            |  Total  | Lumped  |  RC pi  | network | network |Annotated|
 --------------------+---------+---------+---------+---------+---------+---------+
 Internal nets       |         |         |         |         |         |         |
-  - Pin to pin nets |     766 |       0 |       0 |      33 |     733 |       0 |
+  - Pin to pin nets |     766 |       0 |       0 |      94 |     672 |       0 |
   - Driverless nets |       0 |       0 |       0 |       0 |       0 |       0 |
   - Loadless nets   |     239 |       0 |       0 |     239 |       0 |       0 |
 --------------------+---------+---------+---------+---------+---------+---------+
@@ -86,5 +86,5 @@ Boundary/port nets  |         |         |         |         |         |         
   - Driverless nets |       0 |       0 |       0 |       0 |       0 |       0 |
   - Loadless nets   |       0 |       0 |       0 |       0 |       0 |       0 |
 --------------------+---------+---------+---------+---------+---------+---------+
-                    |    1421 |       0 |       0 |     272 |    1149 |       0 |
+                    |    1421 |       0 |       0 |     333 |    1088 |       0 |
 
